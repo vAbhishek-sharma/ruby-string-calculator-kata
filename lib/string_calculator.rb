@@ -1,10 +1,12 @@
 class StringCalculator
   def add(str)
     return 0 if str.empty?
-    sanitized_string =  parse_str(str)
-    str_arr = parse_delimiter(sanitized_string)
     total = 0
     negative_nums = []
+
+    sanitized_string =  parse_str(str)
+    str_arr = parse_delimiter(sanitized_string)
+
     str_arr.each do |number|
       num = number.to_i
       if num < 0
@@ -14,9 +16,10 @@ class StringCalculator
     end
 
     negative_nums.each  do  |num|
-      error = "negatives not allowed, number: #{num}"
+      error = ArgumentError.new("negatives not allowed, number: #{num}")
       raise error
     end
+
     return total
   end
 
