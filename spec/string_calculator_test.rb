@@ -32,6 +32,12 @@ RSpec.describe StringCalculator do
     end
     it "return multiple exceptions with number if there are multiple negative numbers" do
       expect { calc.add("-1\n,\n-5,-22") }.to raise_error(ArgumentError, "negatives not allowed, number: -1,-5,-22")
+      expect { calc.add("-1\n,-22") }.to raise_error(ArgumentError, "negatives not allowed, number: -1,-22")
+
+    end
+
+    it "skips the numbers greater than 1000 and add the remaining numbers" do
+      expect(calc.add("1,\n5000,22")).to eq 23
     end
   end
 

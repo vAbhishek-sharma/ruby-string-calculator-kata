@@ -9,8 +9,11 @@ class StringCalculator
 
     str_arr.each do |number|
       num = number.to_i
+      next if num > 1000
+
       if num < 0
         negative_nums << num
+        next
       end
       total += num
     end
