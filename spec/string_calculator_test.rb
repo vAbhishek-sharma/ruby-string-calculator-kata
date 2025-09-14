@@ -1,7 +1,7 @@
 require 'rspec'
 require "string_calculator"
 RSpec.describe StringCalculator do
-  subject(:calc) {describe_class.new}
+  subject(:calc) {described_class.new}
   describe "#add" do
     it 'first test' do
     end
