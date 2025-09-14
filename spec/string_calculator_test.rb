@@ -31,6 +31,12 @@ RSpec.describe StringCalculator do
   describe "#parse_str" do
     it "first test" do
     end
+
+    it "returns the input string and return sanitized string" do
+      expect(calc.parse_str("\n1,22")).to eq "1,22"
+      expect(calc.parse_str("1\n,\n5,22")).to eq "1,5,22"
+      expect(calc.parse_str("1\n,\n5,\n22\n")).to eq "1,5,22"
+    end
   end
 
 end
