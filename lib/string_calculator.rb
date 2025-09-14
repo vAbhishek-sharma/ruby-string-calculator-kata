@@ -10,7 +10,6 @@ class StringCalculator
   end
 
   def parse_str(str_to_sanitize)
-    str = str_to_sanitize.gsub("\n", "")
-    str
+    str_to_sanitize.gsub("\n", "")
   end
 end
