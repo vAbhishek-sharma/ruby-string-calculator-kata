@@ -8,4 +8,8 @@ class StringCalculator
     end
     return total
   end
+
+  def parse_str()
+
+  end
 end

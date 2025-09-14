@@ -21,5 +21,16 @@ RSpec.describe StringCalculator do
       expect(calc.add("13")).to eq 13
       expect(calc.add("22")).to eq 22
     end
+
+    it "return the total even if the number newline char is in the string" do
+      expect(calc.add("\n1,22")).to eq 23
+      expect(calc.add("1\n,\n5,22")).to eq 28
+    end
   end
+
+  describe "#parse_str" do
+    it "first test" do
+    end
+  end
+
 end
