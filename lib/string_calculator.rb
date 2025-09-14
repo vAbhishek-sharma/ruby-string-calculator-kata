@@ -4,8 +4,18 @@ class StringCalculator
     sanitized_string =  parse_str(str)
     str_arr = parse_delimiter(sanitized_string)
     total = 0
+    negative_nums = []
     str_arr.each do |number|
-      total += number.to_i
+      num = number.to_i
+      if num < 0
+        negative_nums << num
+      end
+      total += num
+    end
+
+    negative_nums.each  do  |num|
+      error = "negatives not allowed, number: #{num}"
+      raise error
     end
     return total
   end
@@ -24,4 +34,5 @@ class StringCalculator
       str.split(delimiter)
     end
   end
+
 end

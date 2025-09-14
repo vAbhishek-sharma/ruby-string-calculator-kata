@@ -26,6 +26,10 @@ RSpec.describe StringCalculator do
       expect(calc.add("\n1,22")).to eq 23
       expect(calc.add("1\n,\n5,22")).to eq 28
     end
+
+    it "return exception with number if the number is negative" do
+      expect(calc.add("1\n,\n5,-22")).to raise_error("negatives not allowed, number: -22")
+    end
   end
 
   describe "#parse_str" do
@@ -47,5 +51,6 @@ RSpec.describe StringCalculator do
       expect(calc.parse_delimiter("///1/22/23")).to eq ["1","22", "23"]
     end
   end
+
 
 end
