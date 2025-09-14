@@ -10,8 +10,16 @@ RSpec.describe StringCalculator do
       expect(calc.add("")).to eq 0
     end
 
-    it "it splits two strings and return addition of both" do
+    it "returns splits two strings and return addition of both" do
       expect(calc.add("1,2")).to eq 3
+      expect(calc.add("1,3")).to eq 4
+      expect(calc.add("7,4")).to eq 11
+    end
+
+    it "return the number itself if the number itself" do
+      expect(calc.add("1")).to eq 1
+      expect(calc.add("13")).to eq 13
+      expect(calc.add("22")).to eq 22
     end
   end
 end
