@@ -41,8 +41,10 @@ RSpec.describe StringCalculator do
 
   describe "#parse_delimiter" do
     it "returns parsed arrays with custom delimiter when start of the string contains with pattner //[delimiter] has been passed based on delimiter value" do
-      expect(calc.parse_delimiter("//;1,22")).to eq [1,22]
-      expect(calc.parse_delimiter("//|1,22")).to eq [1,22]
+      expect(calc.parse_delimiter("//;1;22")).to eq ["1","22"]
+      expect(calc.parse_delimiter("//|1|22")).to eq ["1","22"]
+      expect(calc.parse_delimiter("//]1]22]22")).to eq ["1","22","22"]
+      expect(calc.parse_delimiter("///1/22/23")).to eq ["1","22", "23"]
     end
   end
 
