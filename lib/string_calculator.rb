@@ -1,7 +1,8 @@
 class StringCalculator
   def add(str)
     return 0 if str.empty?
-    str_arr =  parse_str(str).split(',')
+    sanitized_string =  parse_str(str)
+    str_arr = parse_delimiter(sanitized_string)
     total = 0
     str_arr.each do |number|
       total += number.to_i
@@ -10,7 +11,7 @@ class StringCalculator
   end
 
   def parse_str(str_to_sanitize)
-    str_to_sanitize.gsub("\n", "")
+    sanitized_str = str_to_sanitize.gsub("\n", "")
   end
 
   def parse_delimiter(str)
