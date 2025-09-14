@@ -15,8 +15,9 @@ class StringCalculator
       total += num
     end
 
-    negative_nums.each  do  |num|
-      error = ArgumentError.new("negatives not allowed, number: #{num}")
+
+    if negative_nums.any?
+      error = ArgumentError.new("negatives not allowed, number: #{negative_nums.join(',')}")
       raise error
     end
 

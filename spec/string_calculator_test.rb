@@ -29,7 +29,9 @@ RSpec.describe StringCalculator do
 
     it "return exception with number if the number is negative" do
       expect { calc.add("1\n,\n5,-22") }.to raise_error(ArgumentError, "negatives not allowed, number: -22")
-
+    end
+    it "return multiple exceptions with number if there are multiple negative numbers" do
+      expect { calc.add("-1\n,\n-5,-22") }.to raise_error(ArgumentError, "negatives not allowed, number: -1,-5,-22")
     end
   end
 
