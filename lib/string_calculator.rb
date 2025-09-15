@@ -28,18 +28,22 @@ class StringCalculator
   end
 
   def parse_str(str_to_sanitize)
-    sanitized_str = str_to_sanitize.gsub("\n", "")
+    str_to_sanitize.gsub("\n", "")
   end
 
   def parse_delimiter(str)
-    delimiter = ","
-    if str.start_with?('//')
-      delimiter = str[2]
-      str = str[3..]
-      str.split(delimiter)
-    else
-      str.split(delimiter)
-    end
+    spec = str[2..] || ""
+
+    delimiter =
+      if spec.start_with?("[") && (close = spec.index("]"))
+        spec[1...close]
+      elsif !spec.empty?
+        spec[0]
+      else
+        delimiter
+      end
+    str = str.gsub(%r{\A(?://(?:\[[^\]]+\])+|//.)}, '')
+    str.split(Regexp.union(delimiter))
   end
 
 end
