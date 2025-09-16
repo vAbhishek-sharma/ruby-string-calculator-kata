@@ -41,10 +41,10 @@ RSpec.describe StringCalculator do
     end
 
     it "returns total of numbers in string after parsing and removing the delimiters" do
-      expect(calc.parse_delimiter("//[;;][|]1;;4000|23")).to eq ["1","22","23"]
-      expect(calc.parse_delimiter("//[||][;]1||22;23")).to eq ["1","22","23"]
-      expect(calc.parse_delimiter("//[?][;]1?22;22")).to eq ["1","22","22"]
-      expect(calc.parse_delimiter("//[//][;]1//22;23")).to eq ["1","22", "23"]
+      expect(calc.add("//[;;][|]1;;4000|23")).to eq 24
+      expect(calc.add("//[||][;]1||22;23")).to eq 46
+      expect(calc.add("//[?][;]1?22;22")).to eq 45
+      expect(calc.add("//[//][;]1//22;23")).to eq 46
     end
   end
 
