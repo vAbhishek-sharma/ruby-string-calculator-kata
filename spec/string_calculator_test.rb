@@ -53,8 +53,8 @@ RSpec.describe StringCalculator do
 
     it "return uses complex delimiters and remove the newlines" do
       expect(calc.add("//[;;]1;;22")).to eq 23
-      expect(calc.add("//[||]||1||22")).to eq 23
-      expect(calc.add("//[]]]1]]22]]22")).to eq 46
+      expect(calc.add("//[||]1||22")).to eq 23
+      expect(calc.add("//[?]1?22?22")).to eq 45
       expect(calc.add("//[//]1//22//23")).to eq 46
     end
   end
@@ -62,15 +62,15 @@ RSpec.describe StringCalculator do
   describe "#parse_delimiter" do
     it "returns parsed arrays with custom delimiter when start of the string contains with pattner //[delimiter] has been passed based on delimiter value" do
       expect(calc.parse_delimiter("//[;]1;22")).to eq ["1","22"]
-      expect(calc.parse_delimiter("//[;]|1|22")).to eq ["1","22"]
-      expect(calc.parse_delimiter("//[]]1]22]22")).to eq ["1","22","22"]
+      expect(calc.parse_delimiter("//[|]1|22")).to eq ["1","22"]
+      expect(calc.parse_delimiter("//[?]1?22?22")).to eq ["1","22","22"]
       expect(calc.parse_delimiter("//[/]1/22/23")).to eq ["1","22", "23"]
     end
 
     it "returns parsed arrays with custom delimiter when start of the string contains with pattner //[same multiple delimiters ] has been passed based on delimiter value" do
       expect(calc.parse_delimiter("//[;;]1;;22")).to eq ["1","22"]
-      expect(calc.parse_delimiter("//[||]||1||22")).to eq ["1","22"]
-      expect(calc.parse_delimiter("//[]]]1]]22]]22")).to eq ["1","22","22"]
+      expect(calc.parse_delimiter("//[||]1||22")).to eq ["1","22"]
+      expect(calc.parse_delimiter("//[?]1?22?22")).to eq ["1","22","22"]
       expect(calc.parse_delimiter("//[//]1//22//23")).to eq ["1","22", "23"]
     end
   end

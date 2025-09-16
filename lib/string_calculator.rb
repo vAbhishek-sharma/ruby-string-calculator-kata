@@ -6,7 +6,7 @@ class StringCalculator
 
     sanitized_string =  parse_str(str)
     str_arr = parse_delimiter(sanitized_string)
-
+    puts str_arr
     str_arr.each do |number|
       num = number.to_i
       next if num > 1000
@@ -17,7 +17,7 @@ class StringCalculator
       end
       total += num
     end
-
+    puts "total: #{total}"
 
     if negative_nums.any?
       error = ArgumentError.new("negatives not allowed, number: #{negative_nums.join(',')}")
@@ -32,18 +32,21 @@ class StringCalculator
   end
 
   def parse_delimiter(str)
-    spec = str[2..] || ""
+    delimiter = ","
+    if str.start_with?("//")
+      spec = str[2..] || ""
 
-    delimiter =
+      delimiter =
       if spec.start_with?("[") && (close = spec.index("]"))
         spec[1...close]
-      elsif !spec.empty?
-        spec[0]
       else
-        delimiter
+        spec[0]
       end
+    end
+
     str = str.gsub(%r{\A(?://(?:\[[^\]]+\])+|//.)}, '')
-    str.split(Regexp.union(delimiter))
+    str_arr= str.split(Regexp.union(delimiter))
+    str_arr
   end
 
 end
