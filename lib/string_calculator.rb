@@ -32,19 +32,19 @@ class StringCalculator
   end
 
   def parse_delimiter(str)
-    delimiter = ","
+    delimiter = [","]
     if str.start_with?("//")
       spec = str[2..] || ""
 
       delimiter =
-      if spec.start_with?("[") && (close = spec.index("]"))
-        spec[1...close]
+      if spec.start_with?("[")
+        spec.scan(/\[([^\]]+)\]/).flatten
       else
-        spec[0]
+        [spec[0]]
       end
     end
 
-    str = str.gsub(%r{\A(?://(?:\[[^\]]+\])+|//.)}, '')
+    str = str.sub(%r{\A(?://(?:\[[^\]]+\])+|//.)}, '') #Removing the
     str_arr= str.split(Regexp.union(delimiter))
     str_arr
   end

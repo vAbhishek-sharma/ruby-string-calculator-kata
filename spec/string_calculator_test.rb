@@ -39,6 +39,13 @@ RSpec.describe StringCalculator do
     it "skips the numbers greater than 1000 and add the remaining numbers" do
       expect(calc.add("1,\n5000,22")).to eq 23
     end
+
+    it "returns total of numbers in string after parsing and removing the delimiters" do
+      expect(calc.parse_delimiter("//[;;][|]1;;4000|23")).to eq ["1","22","23"]
+      expect(calc.parse_delimiter("//[||][;]1||22;23")).to eq ["1","22","23"]
+      expect(calc.parse_delimiter("//[?][;]1?22;22")).to eq ["1","22","22"]
+      expect(calc.parse_delimiter("//[//][;]1//22;23")).to eq ["1","22", "23"]
+    end
   end
 
   describe "#parse_str" do
@@ -72,6 +79,12 @@ RSpec.describe StringCalculator do
       expect(calc.parse_delimiter("//[||]1||22")).to eq ["1","22"]
       expect(calc.parse_delimiter("//[?]1?22?22")).to eq ["1","22","22"]
       expect(calc.parse_delimiter("//[//]1//22//23")).to eq ["1","22", "23"]
+    end
+    it "returns parsed arrays with custom delimiter when start of the string contains with mulitple pattners with //[same multiple delimiters ] has been passed based on delimiter value" do
+      expect(calc.parse_delimiter("//[;;][|]1;;22|23")).to eq ["1","22","23"]
+      expect(calc.parse_delimiter("//[||][;]1||22;23")).to eq ["1","22","23"]
+      expect(calc.parse_delimiter("//[?][;]1?22;22")).to eq ["1","22","22"]
+      expect(calc.parse_delimiter("//[//][;]1//22;23")).to eq ["1","22", "23"]
     end
   end
 
